@@ -1,0 +1,10 @@
+{
+  "pimaPerceptron.py::test_lrthreshold_train[train_data3-targets3]": true,
+  "pimaPerceptron.py::test_slperceptron_train[train_data0-targets0]": true,
+  "pimaPerceptron.py::test_slperceptron_train[train_data1-targets1]": true,
+  "pimaPerceptron.py::test_slperceptron_train[train_data2-targets2]": true,
+  "pimaPerceptron.py::test_slperceptron_train[train_data3-targets3]": true,
+  "primaPerceptron.py::test_lrthreshold_train[train_data3-targets3]": true,
+  "primaPerceptron.py::test_slperceptron_train[train_data0-target0]": true,
+  "primaPerceptron.py::test_slperceptron_train[train_data3-targets3]": true
+}
