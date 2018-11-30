@@ -1,0 +1,90 @@
+* Paper Criteria
+Submit a report of not more than 5 pages that includes descriptions of:
+
+- Your final choice of anomaly detection algorithm, including the values of all
+  parameters required by the algorithm, and why you chose that algorithm. If you
+  had to implement portions of the algorithm on your own, explain also how you
+  implemented the algorithm.
+
+- Any pre-processing, including feature selection or extraction, you performed,
+  and how that affected the results.
+
+- How you tested your algorithm and what other algorithms you compared against.
+  Explain why you chose a certain algorithm. Explain how you assessed the
+  goodness of a particular algorithm given the lack of labels to evaluate even
+  cross-validation accuracy.
+
+- Discuss how you might go about rolling out your proposed system in practice.
+  How would it interact with existing signature-based detectors? How would you
+  do things differently if you had access to a network administrator who could
+  provide feedback (such as labels) to you? How would you best use the network
+  administrator’s time? How would you change your algorithm to incorporate the
+  feedback?
+
+* Procedural Notes
+  I think I should start with a metric that is similar to the grading metric. So
+  I'm going to look at the evaluate file to see.
+
+  This doesn't make much sense because the test data that Xu will use has labels.
+  Either I have to label some manually or figure out a different way.
+  
+  Instead I'm looking at the survey paper referenced in the project notes. Here
+  are my takes on the different techniques:
+** Histogram Profiling
+   Also pretty popular
+   This looks relatively simple, but I worry about its effectiveness with the
+   high-dimensionality and that I would choose the right structure for it.
+** +Neural Network
+   *May be supervised?*
+   Also pretty popular
+   The Replicator Neural Network seems interesting in how it constrains and
+   phrases the problem, but I would want to know more about the assumptions.
+   Research took place in 2002.
+** Bayesian Networks
+   independance doesn't feel like a good assumption here. not sure it it's
+   unsupervised anyways.
+** SVMs
+   Seems to be supervised?
+** +Rule Based Learning
+   Has been used unsupervised and in this application. Association Rule learning
+   covers categorical data. Looks neat.
+** Kmeans
+   Deffo unsupervised.
+   May require advanced tactics to deal with clusters of varying density
+   Do we even have those?
+** Clustering
+   3 Types:
+*** Belong or no
+*** Belong or far from centroids
+    Proposed for the field. but I think it was semi supervised.
+*** Big cluster, small cluster
+** Spectral
+   Apply as a preprocessing of another?
+** Info Theory
+   again, maybe preprocess? idk
+
+ I still don't have a good measurement technique though...
+
+ Well to narrow down on the options, I need to have an anomaly score instead of
+ a classification so that the test eval will work. This makes these look good:
+ - Neural Networks
+ - Maybe Rule Based?
+ - Historgram?
+ - Dist from nearest centroid clustering?
+
+ Maybe I can look at the output and make sure i'm only seeing a few anomalies? I
+ really want to label some...
+
+ Okay well in the meantime, I'm just going to try something. I think the dist
+ from cluster thing will work well. esp once I tune a max valid clusters or
+ something. So here goes:
+
+ 
+ BOOM BAM ALACAZAM! I think I figure out an accuracy metric: As I increase the
+ threshold over the output, is there a distinct point with a large drop off in
+ anomalies? This may be correlated to the prof's test metric since there will
+ have to be a steep drop off in positives for the TPR to approach 1 as the False
+ True values are weeded out.
+ 
+    
+   
